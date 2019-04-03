@@ -8,6 +8,7 @@ export default class Todos extends Component {
         <Helmet>
           <title>Todos</title>
         </Helmet>
+        <h1>Todos</h1>
       </>
     )
   }

@@ -24,7 +24,7 @@ class Register extends Component {
   // Same as above commented statements but more suitable
   // Handling all inputs
   handleChange(e){
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   // Handling register form
@@ -37,6 +37,7 @@ class Register extends Component {
     let API_ROOT = "http://ec2-13-53-32-89.eu-north-1.compute.amazonaws.com:3000";
     axios.post(API_ROOT + "/register", userData)
     .then((response) => {
+      console.log(response);
       if(response.status === 201){
         this.props.history.push("/register");
         this.setState({ message: "You have been registered successfully. Please login now" });
@@ -44,12 +45,13 @@ class Register extends Component {
     })
     .catch((error) => {
       if (error.response && error.response.status === 400) {
-      this.setState({ message: "Something went wrong!!!!" });
+      this.setState({ message: "Something went wrong !!!!" });
       }
     });
   }
 
   render() {
+    //console.log(this.state);
     return (
       <div>
       <Helmet>
