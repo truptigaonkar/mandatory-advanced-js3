@@ -34,7 +34,7 @@ export default class Login extends Component {
 
     axios.post(API_ROOT + "/auth", userData, { cancelToken: this.source.token })
       .then((response) => {
-        console.log(response); 
+        console.log(response);
         if (response.status === 200) {
           updateToken(response.data.token); // Token
           window.localStorage.setItem("token", response.data.token)  // Saving token in localStorage

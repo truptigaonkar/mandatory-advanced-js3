@@ -40,8 +40,13 @@ class Register extends Component {
       console.log(response);
       if(response.status === 201){
         this.props.history.push("/register");
-        this.setState({ message: "You have been registered successfully. Please login now" });
+        this.setState({ 
+          message: "You have been registered successfully. Please login now", 
+          email:"", // Clearing an input value after form submit
+          password:"" // Clearing an input value after form submit
+        });
       }
+      
     })
     .catch((error) => {
       if (error.response && error.response.status === 400) {
