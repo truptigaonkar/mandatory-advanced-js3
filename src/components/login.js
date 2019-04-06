@@ -19,16 +19,16 @@ export default class Login extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  // Handling register form
+  // Handling login form
   handleFormSubmit(e) {
     e.preventDefault();
+
+    this.source = axios.CancelToken.source(); // Cancel active request
+
     const userData = {
       email: this.state.email,
       password: this.state.password
     }
-
-    // Necessary step to perform
-    this.source = axios.CancelToken.source();
 
     let API_ROOT = "http://ec2-13-53-32-89.eu-north-1.compute.amazonaws.com:3000";
 
@@ -50,7 +50,7 @@ export default class Login extends Component {
 
   }
 
-  // Necessary step to perform
+  // Unmount mounted data
   componentWillUnmount() {
     if (this.source) {
       this.source.cancel();

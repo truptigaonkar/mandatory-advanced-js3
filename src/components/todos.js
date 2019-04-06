@@ -19,7 +19,14 @@ export default class Todos extends Component {
     }
   }
 
+  // Fetch the data from An External API  
   componentDidMount() {
+    this.subscription = token$.subscribe((token) => {
+      this.setState({ token });
+    });
+
+    this.source = axios.CancelToken.source(); // Cancel active request
+
     // Getting profile (email) information
     if (!!this.state.token) {
       const decoded = jwt.decode(token$.value);
@@ -33,6 +40,7 @@ export default class Todos extends Component {
     axios
       .get(API_ROOT + "/todos",
         {
+          cancelToken: this.source.token,
           headers: { Authorization: "Bearer " + token$.value, }
         })
       .then(response => {
@@ -46,8 +54,10 @@ export default class Todos extends Component {
       })
   }
 
-  // Necessary step: when you perform componentDidMount(), it is advisable to use componentWillUnmount()
+  // Unmount mounted data
   componentWillUnmount() {
+    this.source.cancel(); // Cancel active request
+    this.subscription.unsubscribe(); // cancel active subscription
     updateToken(null);
   }
 
@@ -67,10 +77,22 @@ export default class Todos extends Component {
   // CREATE: Handling creating new todo form
   handleFormSubmit(e) {
     e.preventDefault();
+
+    this.subscription = token$.subscribe((token) => {
+      this.setState({ token });
+    });
+
+    this.source = axios.CancelToken.source();
+
     axios
       .post(API_ROOT + "/todos",
         { content: this.state.newtodo },
-        { headers: { Authorization: "Bearer " + token$.value } }
+        {
+          headers:{
+            cancelToken: this.source.token,
+            Authorization: "Bearer " + token$.value
+          }
+        }
       )
       .then((response) => {
         console.log(response);
@@ -90,6 +112,7 @@ export default class Todos extends Component {
     axios
       .delete(API_ROOT + "/todos/" + id, {
         headers: {
+          cancelToken: this.source.token,
           Authorization: "Bearer " + token$.value
         },
       })
@@ -134,7 +157,7 @@ export default class Todos extends Component {
             )
           })
         }
-        
+
       </>
     )
   }
