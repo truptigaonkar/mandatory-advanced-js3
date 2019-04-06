@@ -29,7 +29,7 @@ export default class Todos extends Component {
       this.props.history.push("/login");
     }
 
-    // Fetching todo list
+    // READ/LIST: Fetching todo list
     axios
       .get(API_ROOT + "/todos",
         {
@@ -64,7 +64,7 @@ export default class Todos extends Component {
     this.setState({ newtodo: e.target.value });
   }
 
-  // Handling creating new todo form
+  // CREATE: Handling creating new todo form
   handleFormSubmit(e) {
     e.preventDefault();
     axios
@@ -85,6 +85,26 @@ export default class Todos extends Component {
       });
   }
 
+  // DELETE: Handling delete todo function
+  handleDeleteTodo(id) {
+    axios
+      .delete(API_ROOT + "/todos/" + id, {
+        headers: {
+          Authorization: "Bearer " + token$.value
+        },
+      })
+      .then(response => {
+        this.setState({ message: "Deleted todo successfully" });
+        this.componentDidMount() //Refresh the page with todo list
+
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({ message: "Something went wrong !!!!" });
+        this.componentDidMount() //Refresh the page with todo list
+      })
+  }
+
   render() {
     return (
       <>
@@ -95,7 +115,7 @@ export default class Todos extends Component {
         <p>Welcome User, {this.state.email} <button type="button" onClick={this.handleLogout.bind(this)}>todos.js Logout</button></p>
 
         <h2>Todo Page</h2>
-        <div className="message">{this.state.message}</div> {/* erroror messsage */}
+        <div className="message">{this.state.message}</div> {/* success/error messsage */}
 
         {/* Creating new todos */}
         <form onSubmit={this.handleFormSubmit.bind(this)}>
@@ -106,16 +126,15 @@ export default class Todos extends Component {
         {/* Listing todos */}
         {
           this.state.todolist.map(todo => {
-            console.log("Single todo is: ", todo);
+            //console.log("Single todo is: ", todo);
             return (
               <ul key={todo.id}>
-                <li >{todo.content}</li>
+                <li >{todo.content} <button onClick={() => { this.handleDeleteTodo(todo.id) }}>Delete</button></li>
               </ul>
             )
           })
         }
-
-
+        
       </>
     )
   }

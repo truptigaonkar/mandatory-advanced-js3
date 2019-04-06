@@ -63,7 +63,7 @@ class Register extends Component {
           <title>Register</title>
         </Helmet>
         <h1>register</h1>
-        <div className="message">{this.state.message}</div> {/* erroror messsage */}
+        <div className="message">{this.state.message}</div> {/* success/error messsage */}
         <form onClick={this.handleFormSubmit.bind(this)}>
           <label>Email</label>
           {/* <input type="email" value={this.state.email} onChange={this.handleEmailInput.bind(this)} /> <br/> */}

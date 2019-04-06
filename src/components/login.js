@@ -65,7 +65,7 @@ export default class Login extends Component {
           <title>Login</title>
         </Helmet>
         <h1>Login</h1>
-        <div className="message">{this.state.message}</div> {/* erroror messsage */}
+        <div className="message">{this.state.message}</div> {/* success/error messsage */}
         <form onSubmit={this.handleFormSubmit.bind(this)}>
           <label>Email</label>
           <input type="email" name="email" value={this.state.email} onChange={this.handleChange.bind(this)} /><br />
