@@ -33,7 +33,7 @@ export default class Todos extends Component {
       console.log("Decoded email: ", decoded.email);
       this.setState({ email: decoded.email })
     } else {
-      this.props.history.push("/login");
+      this.props.history.push("/");
     }
 
     // READ/LIST: Fetching todo list
@@ -65,7 +65,7 @@ export default class Todos extends Component {
   handleLogout(e) {
     e.preventDefault();
     updateToken(null);
-    this.props.history.push("/login");
+    this.props.history.push("/");
   }
 
   // Handling input button
