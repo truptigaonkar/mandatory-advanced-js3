@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
-class Register extends Component {
+import TextField from "@material-ui/core/TextField";
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+export default class Register extends Component {
 
   constructor(props) {
     super(props);
@@ -69,25 +78,48 @@ class Register extends Component {
   render() {
     //console.log(this.state);
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         <Helmet>
           <title>Register</title>
-        </Helmet>
-        <h1>register</h1>
-        <div className="message">{this.state.message}</div> {/* success/error messsage */}
-        <form onClick={this.handleFormSubmit.bind(this)}>
-          <label>Email</label>
-          {/* <input type="email" value={this.state.email} onChange={this.handleEmailInput.bind(this)} /> <br/> */}
-          <input type="email" name="email" value={this.state.email} onChange={this.handleChange.bind(this)} /> <br />
-          <label>Password</label>
-          {/* <input type="password" value={this.state.password} onChange={this.handlePasswordInput.bind(this)} /> <br/> */}
-          <input type="password" name="password" value={this.state.password} onChange={this.handleChange.bind(this)} /> <br />
-          <button type="submit">Register</button>
-        </form>
+        </Helmet><br/>
+
+        <div className="login__form">
+          <form onSubmit={this.handleFormSubmit.bind(this)} noValidate autoComplete="off">
+            <Card style={{ width: '300px' }} >
+              <i className="material-icons accountman" style={{ fontSize: '100px' }}>account_circle</i>
+              <CardHeader title="SIGN-UP" />
+              <CardContent>
+                <div className="message">{this.state.message}</div> {/* success/error messsage */}
+                <Typography component="p">
+                  <TextField
+                    id="outlined-email-input"
+                    label="Email" style={{ width: 250 }}
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.handleChange.bind(this)}
+                  /> <br /><br />
+                  <TextField style={{ width: 250, margin: 0 }}
+                    id="outlined-email-input"
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleChange.bind(this)}
+                  /> <br/><br/>
+                </Typography>
+              </CardContent><br/><br/>
+              <CardActions className="login__button">
+                <Button style={{ width: '100%' }} type="submit" variant="contained" color="primary">REGISTER</Button>
+              </CardActions>
+              <p>Already have an account? <Button variant="outlined" color="primary"><Link to="/">Login</Link></Button></p>
+            </Card>
+          </form>
+        </div>
+
       </div>
     )
   }
 }
 
-export default Register
 

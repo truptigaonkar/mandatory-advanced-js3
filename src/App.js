@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import register from './components/register';
 import login from './components/login';
 import todos from './components/todos';
-import { token$, updateToken } from './store';
+import { token$ } from './store';
 
 class App extends Component {
 
@@ -25,11 +25,6 @@ class App extends Component {
     this.subscription.unsubscribe();
   }
 
-  // Handling logout button
-  handleLogout(e) {
-    e.preventDefault();
-    updateToken(null);
-  }
 
   render() {
     return (

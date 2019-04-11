@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import axios from 'axios'
 import { updateToken } from "../store";
+import { Link } from 'react-router-dom';
+
+import TextField from "@material-ui/core/TextField";
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 export default class Login extends Component {
 
@@ -60,20 +69,47 @@ export default class Login extends Component {
   render() {
     //console.log(this.state);
     return (
-      <>
+      <div style={{ textAlign: 'center' }}>
+
         <Helmet>
           <title>Login</title>
-        </Helmet>
-        <h1>Login</h1>
-        <div className="message">{this.state.message}</div> {/* success/error messsage */}
-        <form onSubmit={this.handleFormSubmit.bind(this)}>
-          <label>Email</label>
-          <input type="email" name="email" value={this.state.email} onChange={this.handleChange.bind(this)} /><br />
-          <label>Password</label>
-          <input type="password" name="password" value={this.state.password} onChange={this.handleChange.bind(this)} /><br />
-          <button type="submit">Submit</button>
-        </form>
-      </>
+        </Helmet><br />
+
+        <div className="login__form">
+          <form onSubmit={this.handleFormSubmit.bind(this)} noValidate autoComplete="off">
+            <Card style={{ width: '300px' }} >
+              <i className="material-icons accountman" style={{ fontSize: '100px' }}>account_circle</i>
+              <CardHeader title="SIGN-IN" />
+              <CardContent>
+                <div className="message">{this.state.message}</div> {/* success/error messsage */}
+                <Typography component="p">
+                  <TextField
+                    id="outlined-email-input"
+                    label="Email" style={{ width: 250 }}
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.handleChange.bind(this)}
+                  /> <br /><br />
+                  <TextField style={{ width: 250, margin: 0 }}
+                    id="outlined-email-input"
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleChange.bind(this)}
+                  /><br/><br/>
+                </Typography>
+              </CardContent><br/><br/>
+              <CardActions className="login__button">
+                <Button style={{ width: '100%' }} type="submit" variant="contained" color="primary">LOGIN</Button>
+              </CardActions>
+              <p>Don't have an Account? <Button variant="outlined" color="primary"><Link to="/register">Register</Link></Button></p>
+            </Card>
+          </form>
+        </div>
+
+      </div>
     )
   }
 }

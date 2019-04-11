@@ -4,6 +4,14 @@ import jwt from 'jsonwebtoken'
 import { token$, updateToken } from '../store'
 import axios from 'axios'
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from "@material-ui/core/TextField";
+import Chip from '@material-ui/core/Chip';
+
 let API_ROOT = "http://ec2-13-53-32-89.eu-north-1.compute.amazonaws.com:3000";
 
 export default class Todos extends Component {
@@ -45,7 +53,7 @@ export default class Todos extends Component {
         })
       .then(response => {
         console.log("Response is: ", response);
-        this.setState({ todolist: response.data.todos })
+        this.setState({ todolist: response.data.todos.reverse() })
         //console.log("Todo list contains: ", this.state.todolist[0]);
       })
       .catch(error => {
@@ -88,7 +96,7 @@ export default class Todos extends Component {
       .post(API_ROOT + "/todos",
         { content: this.state.newtodo },
         {
-          headers:{
+          headers: {
             cancelToken: this.source.token,
             Authorization: "Bearer " + token$.value
           }
@@ -103,7 +111,7 @@ export default class Todos extends Component {
         });
       })
       .catch((error) => {
-        this.setState({ message: "Something went wrong !!!!" });
+        this.setState({ message: "Please fill in the field !!!!" });
       });
   }
 
@@ -130,35 +138,57 @@ export default class Todos extends Component {
 
   render() {
     return (
-      <>
+      <div>
         <Helmet>
           <title>Todos</title>
         </Helmet>
+        <AppBar>
+          <Toolbar>
+            <IconButton color="inherit" aria-label="Menu" >
+              <i className="material-icons accountman">account_circle </i> {this.state.email}
+            </IconButton>
+            <Typography variant="h6" color="inherit" style={{ width: '100%', textAlign: 'right' }}  >
+              <Button color="inherit" onClick={this.handleLogout.bind(this)} >Logout</Button>
+            </Typography>
+          </Toolbar>
+        </AppBar> <br /><br /><br /><br /><br />
 
-        <p>Welcome User, {this.state.email} <button type="button" onClick={this.handleLogout.bind(this)}>todos.js Logout</button></p>
-
-        <h2>Todo Page</h2>
-        <div className="message">{this.state.message}</div> {/* success/error messsage */}
-
-        {/* Creating new todos */}
-        <form onSubmit={this.handleFormSubmit.bind(this)}>
-          <input type="text" value={this.state.newtodo} onChange={this.handleChange.bind(this)} />
-          <button>Add Todos</button>
-        </form><br />
-
-        {/* Listing todos */}
-        {
-          this.state.todolist.map(todo => {
-            //console.log("Single todo is: ", todo);
-            return (
-              <ul key={todo.id}>
-                <li >{todo.content} <button onClick={() => { this.handleDeleteTodo(todo.id) }}>Delete</button></li>
-              </ul>
-            )
-          })
-        }
-
-      </>
+        <div className="form">
+          <div marginBottom='5px'>
+          {/* Creating new todos */}
+          <form onSubmit={this.handleFormSubmit.bind(this)}>
+            <TextField style={{ width: '100%' }}
+              id="outlined-Add-Todo-input"
+              label="Add Todos"
+              type="text"
+              variant="outlined"
+              value={this.state.newtodo}
+              onChange={this.handleChange.bind(this)}
+            />
+          </form>
+          <div className="message">{this.state.message}</div> {/* success/error messsage */}
+          </div>
+          {/* Listing todos */}
+          <div className="todo__form">
+            {
+              this.state.todolist.map(todo => {
+                //console.log("Single todo is: ", todo);
+                return (
+                  <>
+                    <ul key={todo.id} >
+                      <Chip style={{ textAlign: 'right', justifyContent: "space-between", marginBottom: '0' }}
+                        label={todo.content}
+                        onDelete={() => { this.handleDeleteTodo(todo.id) }}
+                        color="secondary"
+                      />
+                    </ul>
+                  </>
+                )
+              })
+            }
+          </div>
+        </div>
+      </div>
     )
   }
 }
