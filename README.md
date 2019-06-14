@@ -15,30 +15,30 @@ import jwt from ‘jsonwebtoken’;
 const decoded = jwt.decode(token);
 console.log(decoded);
 ```
-* API endpoints: 
+* **API endpoints:**
   The backend has endpoints for user registration, authentication and managing a personal todo list. The API will accept both   JSON and form data. To illustrate how the API is used, examples using axios are provided.
-* POST /register
+* **POST /register**
   Used to register a new user. Requires an email and a password . If no error occurs the API will respond with status code 201.
   Example
   ```
   axios.post(API_ROOT + ‘/register’, { email, password });
   ```
-* POST /auth
+* **POST /auth**
   Used to sign in. Requires an email and a password . If the email and password are valid the API will respond with status code 200 and issue a JWT token which expires in 1 hour.
   ```
   axios.post(API_ROOT + ‘/auth’, { email, password });
   ```
-* GET /todos
+* **GET /todos**
 Used to fetch a list of todos for a user. A JWT token must be sent with the request.
   ```
   axios.get(API_ROOT + ‘/todos’, options);
   ```
-* POST /todos
+* **POST /todos**
 Used to create a new todo. Requires an object with a “content” property.
   ```
   Authorization: Bearer <token>axios.post(API_ROOT + ‘/todos’, { content: ‘Water the plants’ }, options);
   ```
-* DELETE /todos/:id
+* **DELETE /todos/:id**
 Used to delete a todo.
   ```
   axios.delete(API_ROOT + ‘/todos/’ + id, options);
