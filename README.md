@@ -1,4 +1,4 @@
-## Movies CRUD - Advanced JavaScript with React - [Live Demo]( http://truptigaonkar.github.io/mandatory-advanced-js3/)
+## Todo Application with user registration and login(JWT) - React - [Live Demo]( http://truptigaonkar.github.io/mandatory-advanced-js3/)
 ### Instructions
 * create a Todo application with user registration and user authentication with backend server http://ec2-13-53-32-89.eu-north-1.compute.amazonaws.com:3000/
 * With this application a user will be able to create a new user, sign in and manage a list of todo items.
