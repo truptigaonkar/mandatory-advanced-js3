@@ -28,7 +28,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Route exact path="/" component={login} />
         <Route path="/register" component={register} />
         <Route path="/todos" component={todos} />
