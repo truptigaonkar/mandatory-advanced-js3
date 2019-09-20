@@ -39,7 +39,7 @@ export default class Login extends Component {
       password: this.state.password
     }
 
-    let API_ROOT = "http://ec2-13-53-32-89.eu-north-1.compute.amazonaws.com:3000";
+    let API_ROOT = "http://localhost:8000";
 
     axios.post(API_ROOT + "/auth", userData, { cancelToken: this.source.token })
       .then((response) => {

@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import TextField from "@material-ui/core/TextField";
 import Chip from '@material-ui/core/Chip';
 
-let API_ROOT = "http://ec2-13-53-32-89.eu-north-1.compute.amazonaws.com:3000";
+let API_ROOT = "http://localhost:8000";
 
 export default class Todos extends Component {
 
