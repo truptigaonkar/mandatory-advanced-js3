@@ -1,4 +1,11 @@
-## Todo Application with user registration and login(JWT) - React - [Live Demo]( http://truptigaonkar.github.io/mandatory-advanced-js3/)
+## Todo Application with user registration and login(JWT) - React 
+
+<p align="center"> 
+<img width="200" height="250" alt="1  register" src="https://user-images.githubusercontent.com/14937374/76993137-a97a0a80-694c-11ea-8032-42c767989872.png">
+<img width="200" height="250" alt="2  login" src="https://user-images.githubusercontent.com/14937374/76993141-abdc6480-694c-11ea-96de-5f706651152e.png">
+<img width="400" height="250" alt="3  todo list" src="https://user-images.githubusercontent.com/14937374/76993142-ac74fb00-694c-11ea-8973-b8509d1a1f9e.png">
+</p>
+
 #### Technologies
 * Node
 * React
