@@ -1,6 +1,6 @@
 ## Todo Application with user registration and login(JWT) - React 
 
-![new](https://user-images.githubusercontent.com/14937374/79669730-e2acd100-81bd-11ea-86ec-d4922a96d5a0.gif)
+<img width="600" src="https://user-images.githubusercontent.com/14937374/79669730-e2acd100-81bd-11ea-86ec-d4922a96d5a0.gif">
 
 #### Technologies
 * Node
