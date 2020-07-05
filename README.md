@@ -8,15 +8,23 @@
 * Backend: JSON REST API
 * JSON Web Tokens (JWT)
 * Material Design (https://material.io)
+
 #### Installation
+
+Open Server in one terminal
 ```
   $ git clone git@github.com:truptigaonkar/mandatory-advanced-js3.git
-  $ cd mandatory-advanced-js3.git
+  $ npm install
+  $ npm start
+```
+Open Client in another terminal
+``` 
+  $ cd client
   $ npm install
   $ npm start
 ```
 ### Instructions
-* create a Todo application with user registration and user authentication with backend server http://ec2-13-53-32-89.eu-north-1.compute.amazonaws.com:3000/
+* create a Todo application with user registration and user authentication with backend server file server.js
 * With this application a user will be able to create a new user, sign in and manage a list of todo items.
 * The authentication will be done using JSON Web Tokens (JWT) which is a standard used to issue secure access tokens https://jwt.io/. JWT can be used to send information securely. A token contains an object (a payload) and is signed using a secret key. This makes it possible for the server to verify if the token is real or not without storing a copy of the token locally.
 * The server will issue a token containing an email address when a user logs in. This token can be sent to the server using the Authorization header when making API calls.
