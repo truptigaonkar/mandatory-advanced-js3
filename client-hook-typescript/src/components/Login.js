@@ -1,18 +1,19 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
-const Register = () => {
+const Login = () => {
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
     const [message, setMessage] = useState('')
 
-    const handleRegister = (e) =>{
+    const handleLogin = (e) =>{
         e.preventDefault()
-        axios.post('http://localhost:8000/register', { email, password })
+        axios.post('http://localhost:8000/auth', { email, password })
         .then((res) => {
-            //console.log(res.data);
-            setMessage('Registered successfully')
+            console.log(res.data);
+            setMessage('Logined successfully')
             setEmail([])
             setPassword([])
         })
@@ -24,16 +25,16 @@ const Register = () => {
 
     return (
         <>
-            <h4>User Register</h4>
-            <div style={{color:'red'}}>{error && <div>Register: Please fill in all the fields - <b>{error}</b></div>}</div>
+            <h4>Login User</h4>
+            <div style={{color:'red'}}>{error && <div>Register:<b>{error}</b></div>}</div>
             <p style={{color:'green'}}>{message}</p>
-            <form onSubmit={handleRegister}>
+            <form onSubmit={handleLogin}>
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button>REGISTER</button>
+                <button>LOGIN</button>
             </form>
         </>
     )
 }
 
-export default Register;
+export default Login;
