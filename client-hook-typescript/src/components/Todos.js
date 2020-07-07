@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Redirect } from 'react-router-dom';
 import axios from 'axios'
+import jwt from "jsonwebtoken"
 import { token$, updateToken } from '../store'
 import Todolist from './Todolist';
 
@@ -47,10 +48,19 @@ const Todos = () => {
         });
     }
 
+    const getEmail = (token) => {
+        //if we do not have access to 'secret-key' then funk / decode (token) get info
+        const decoded = jwt.decode(token);
+        return decoded.email;
+    }
+
     return (
         <div>
             {toLogin ? <Redirect to="/login" /> : null}
-            <button onClick={handleLogout} >Logout</button>
+            <div style={{display:'flex', justifyContent:'space-around', border:'1px solid black'}}>
+            Login by: <span style={{color:'blue'}}>{getEmail(token)}</span>
+                <button onClick={handleLogout}>Logout</button>
+            </div>
             <div style={{color:'red'}}>{error && <div>Todos: <b>{error}</b></div>}</div>
             <p style={{color:'green'}}>{message}</p>
             <h4>Add Todos</h4>

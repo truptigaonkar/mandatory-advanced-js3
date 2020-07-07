@@ -9,7 +9,6 @@ const Todolist = (props) => {
     const [token] = useState(token$.value)
 
     const handleDelete = (id) =>{
-        //const latestState = [...todos]
         axios.delete(`http://localhost:8000/todos/${id}`, { headers: { Authorization: "Bearer " + token }})
         .then((res) => {
             console.log(res.data);
