@@ -2,12 +2,12 @@ import React, {useState} from 'react'
 import axios from 'axios'
 
 const Register = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('' as any)
+    const [password, setPassword] = useState('' as any)
     const [error, setError] = useState(false)
     const [message, setMessage] = useState('')
 
-    const handleRegister = (e) =>{
+    const handleRegister = (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         axios.post('http://localhost:8000/register', { email, password })
         .then((res) => {

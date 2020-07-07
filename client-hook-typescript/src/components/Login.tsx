@@ -4,13 +4,13 @@ import {Redirect} from 'react-router-dom'
 import { updateToken } from "../store";
 
 const Login = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('' as any)
+    const [password, setPassword] = useState('' as any)
     const [error, setError] = useState(false)
     const [message, setMessage] = useState('')
     const [toHome, setToHome] = useState(false)
 
-    const handleLogin = (e) =>{
+    const handleLogin = (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         axios.post('http://localhost:8000/auth', { email, password })
         .then((res) => {

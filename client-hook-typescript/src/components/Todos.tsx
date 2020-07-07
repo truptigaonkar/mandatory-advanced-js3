@@ -6,11 +6,11 @@ import { token$, updateToken } from '../store'
 import Todolist from './Todolist';
 
 const Todos = () => {
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState([] as any)
     const [error, setError] = useState(false)
     const [token] = useState(token$.value)
     const [toLogin, setToLogin] = useState(false)
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState('' as any)
     const [message, setMessage] = useState('')
 
     useEffect(() => {
@@ -26,13 +26,13 @@ const Todos = () => {
         });
     }, [token]);
 
-    function handleLogout(e) {
+    function handleLogout(e:any) {
         e.preventDefault();
         updateToken(null);
         setToLogin(true)
       }
 
-    const handleAdd = (e) =>{
+    const handleAdd = (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         axios.post('http://localhost:8000/todos', { content }, { headers: { Authorization: "Bearer " + token }})
         .then((res) => {
@@ -48,9 +48,9 @@ const Todos = () => {
         });
     }
 
-    const getEmail = (token) => {
+    const getEmail = (token:any) => {
         //if we do not have access to 'secret-key' then funk / decode (token) get info
-        const decoded = jwt.decode(token);
+        const decoded = jwt.decode(token) as any;
         return decoded.email;
     }
 
