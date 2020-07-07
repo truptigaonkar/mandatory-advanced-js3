@@ -34,7 +34,7 @@ const Todos = () => {
             {toLogin ? <Redirect to="/login" /> : null}
             <button onClick={handleLogout} >Logout</button>
             <div style={{color:'red'}}>{error && <div>Todos: <b>{error}</b></div>}</div>
-            <Todolist todos={todos}/>
+            <Todolist todos={todos} setTodos={setTodos}/>
         </div>
     )
 }
