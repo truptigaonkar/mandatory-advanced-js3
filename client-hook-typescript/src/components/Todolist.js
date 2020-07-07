@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { token$, updateToken } from '../store'
+import { token$ } from '../store'
 import axios from 'axios'
 
 const Todolist = (props) => {
